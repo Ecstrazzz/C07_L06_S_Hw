@@ -101,15 +101,70 @@
 
 // Решение:
 
-Console.InputEncoding = System.Text.Encoding.GetEncoding("utf-16");
-Console.WriteLine("Введите произвольную строку:");
-string arbitStr = Console.ReadLine();
+// Console.InputEncoding = System.Text.Encoding.GetEncoding("utf-16");
+// Console.WriteLine("Введите произвольную строку:");
+// string arbitStr = Console.ReadLine();
 
-bool Palindrome(string str)
+// bool Palindrome(string str)
+// {
+//     string toStripeLow = new string(str.Where(char.IsLetterOrDigit).ToArray()).ToLower();
+//     return toStripeLow.SequenceEqual(toStripeLow.Reverse());
+// }
+
+// bool isPalindrome = Palindrome(arbitStr);
+// Console.WriteLine(isPalindrome ? "Палиндром" : "Не палиндром");
+
+// --------------------------------------------
+
+// Задача 4*(не обязательная): Задайте строку, состоящую
+// из слов, разделенных пробелами. Сформировать строку,
+// в которой слова расположены в обратном порядке.
+// В полученной строке слова должны быть также
+// разделены пробелами.
+
+// Пример: “Hello my world” => “world my Hello”
+
+// Решение:
+
+using System.Text.RegularExpressions;
+
+Console.InputEncoding = System.Text.Encoding.GetEncoding("utf-16");
+Console.WriteLine("Введите слова с пробелами:");
+string strWordsSeparateSpaces = Console.ReadLine();
+
+string ReverseWords(string str)
 {
-    string toStripeLow = new string(str.Where(char.IsLetterOrDigit).ToArray()).ToLower();
-    return toStripeLow.SequenceEqual(toStripeLow.Reverse());
+    string[] words = str.Split(' ');
+    Array.Reverse(words);
+    return string.Join(" ", words);
 }
 
-bool isPalindrome = Palindrome(arbitStr);
-Console.WriteLine(isPalindrome ? "Палиндром" : "Не палиндром");
+bool noSymb(string str)
+{
+    string text = str;
+    bool noSym = true;
+    Regex reg = new Regex("(?![а-яА-Яa-zA-Z ]).");
+    if (reg.IsMatch(text))
+    {
+        noSym = false;
+    }
+    else
+    {
+        noSym = true;
+    }
+    return noSym;
+}
+
+if (string.IsNullOrEmpty(strWordsSeparateSpaces) == true)
+{
+    Console.WriteLine("Вы не ввели слова!");
+}
+else if (noSymb(strWordsSeparateSpaces) == false)
+{
+    Console.WriteLine("Вы ввели недопустимые символы!");
+}
+else
+{
+    string res = ReverseWords(strWordsSeparateSpaces);
+    Console.WriteLine($"Результат:\n{res}");
+}
