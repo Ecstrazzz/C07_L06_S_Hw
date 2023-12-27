@@ -59,7 +59,7 @@ bool whatLang(string str)
     bool eng = false;
     foreach (char c in text)
     {
-        if ((c > 'а' && c < 'я') || (c > 'А' && c < 'Я'))
+        if ((c >= 'а' && c <= 'я') || (c >= 'А' && c <= 'Я'))
             rusCount++;
         else if (c >= 'A' && c <= 'Z')
             engBig++;
