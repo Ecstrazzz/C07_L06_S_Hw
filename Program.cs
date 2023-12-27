@@ -47,45 +47,69 @@
 
 // Если приукрасить и разнообразить
 
-Console.WriteLine("Введите строку содержащую латинские буквы в обоих регистрах:");
-string rowIn2Reg = Console.ReadLine();
+// Console.WriteLine("Введите строку содержащую латинские буквы в обоих регистрах:");
+// string rowIn2Reg = Console.ReadLine();
 
-bool whatLang(string str)
+// bool whatLang(string str)
+// {
+//     int engBig = 0;
+//     int engSmall = 0;
+//     int rusCount = 0;
+//     string text = str;
+//     bool eng = false;
+//     foreach (char c in text)
+//     {
+//         if ((c >= 'а' && c <= 'я') || (c >= 'А' && c <= 'Я'))
+//             rusCount++;
+//         else if (c >= 'A' && c <= 'Z')
+//             engBig++;
+//         else if (c >= 'a' && c <= 'z')
+//             engSmall++;
+//     }
+//     if (rusCount > 0 || engBig == 0 || engSmall == 0)
+//     {
+//         eng = false;
+//     }
+//     else if (engSmall > 0 && engBig > 0)
+//     {
+//         eng = true;
+//     }
+//     return eng;
+// }
+
+// if (rowIn2Reg.Length == 0)
+// {
+//     Console.WriteLine("Вы не ввели символы!");
+// }
+// else if (whatLang(rowIn2Reg) == false)
+// {
+//     Console.WriteLine("Вы не ввели строку согласно условию!");
+// }
+// else
+// {
+//     Console.WriteLine($"Результат:\n{rowIn2Reg.ToLower()}");
+// }
+
+// --------------------------------------------
+
+// Задача 3: Задайте произвольную строку. Выясните,
+// является ли она палиндромом.
+
+// Пример: “aBcD1ef!-” => Нет
+//         “шалаш” => Да
+//         “55655” => Да
+
+// Решение:
+
+Console.InputEncoding = System.Text.Encoding.GetEncoding("utf-16");
+Console.WriteLine("Введите произвольную строку:");
+string arbitStr = Console.ReadLine();
+
+bool Palindrome(string str)
 {
-    int engBig = 0;
-    int engSmall = 0;
-    int rusCount = 0;
-    string text = str;
-    bool eng = false;
-    foreach (char c in text)
-    {
-        if ((c >= 'а' && c <= 'я') || (c >= 'А' && c <= 'Я'))
-            rusCount++;
-        else if (c >= 'A' && c <= 'Z')
-            engBig++;
-        else if (c >= 'a' && c <= 'z')
-            engSmall++;
-    }
-    if (rusCount > 0 || engBig == 0 || engSmall == 0)
-    {
-        eng = false;
-    }
-    else if (engSmall > 0 && engBig > 0)
-    {
-        eng = true;
-    }
-    return eng;
+    string toStripeLow = new string(str.Where(char.IsLetterOrDigit).ToArray()).ToLower();
+    return toStripeLow.SequenceEqual(toStripeLow.Reverse());
 }
 
-if (rowIn2Reg.Length == 0)
-{
-    Console.WriteLine("Вы не ввели символы!");
-}
-else if (whatLang(rowIn2Reg) == false)
-{
-    Console.WriteLine("Вы не ввели строку согласно условию!");
-}
-else
-{
-    Console.WriteLine($"Результат:\n{rowIn2Reg.ToLower()}");
-}
+bool isPalindrome = Palindrome(arbitStr);
+Console.WriteLine(isPalindrome ? "Палиндром" : "Не палиндром");
